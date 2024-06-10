@@ -2,6 +2,7 @@ import {
   IconBrandLinkedin,
   IconBrandTwitter,
   IconBrandYoutube,
+  IconBrandGithub
 } from "@tabler/icons-react";
 
 export const socials = [
@@ -11,13 +12,13 @@ export const socials = [
     icon: IconBrandTwitter,
   },
   {
-    href: "https://linkedin.com/in/manuarora28",
+    href: "https://www.linkedin.com/in/sheba-paul-r-5b05311b8/",
     label: "LinkedIn",
     icon: IconBrandLinkedin,
   },
   {
-    href: "https://youtube.com/maninthere",
-    label: "YouTube",
-    icon: IconBrandYoutube,
+    href: "https://github.com/shebapaulr",
+    label: "Github",
+    icon: IconBrandGithub,
   },
 ];

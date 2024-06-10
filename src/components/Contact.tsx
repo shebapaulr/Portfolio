@@ -1,5 +1,8 @@
 "use client";
 import React, { useState } from "react";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 
 const defaultFormState = {
   name: {
@@ -15,13 +18,36 @@ const defaultFormState = {
     error: "",
   },
 };
+
 export const Contact = () => {
   const [formData, setFormData] = useState(defaultFormState);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    // Write your submit logic here
-    console.log(formData);
+
+    try {
+      await resend.emails.send({
+        from: 'shebapaulr@gmail.com', // Replace with your desired email address
+        to: [formData.email.value],
+        subject: 'Contact Form Submission',
+        text: `Name: ${formData.name.value}\n\nMessage: ${formData.message.value}`,
+        headers: {
+          'X-Entity-Ref-ID': '123456789',
+        },
+        tags: [
+          {
+            name: 'category',
+            value: 'contact_form',
+          },
+        ],
+      });
+
+      console.log("Email sent successfully!");
+      // Reset the form data or display a success message
+    } catch (error) {
+      console.error("Error sending email:", error);
+      // Display an error message
+    }
   };
   return (
     <form className="form" onSubmit={handleSubmit}>
